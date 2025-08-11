@@ -1,0 +1,15 @@
+# requirements.txt
+
+# Para el Web Scraper
+requests
+beautifulsoup4
+
+# Para la Ingesta y el Servidor del Chatbot
+langchain
+langchain-community
+langchain-groq
+sentence-transformers
+chromadb
+fastapi
+uvicorn[standard]
+python-dotenv
