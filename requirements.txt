@@ -1,10 +1,11 @@
 # requirements.txt
+# Lista de todas las librerías de Python necesarias para el proyecto.
 
-# Para el Web Scraper
+# Para el Web Scraper (scraper.py)
 requests
 beautifulsoup4
 
-# Para la Ingesta y el Servidor del Chatbot
+# Para la Ingesta y el Servidor del Chatbot (ingest_chroma.py y main.py)
 langchain
 langchain-community
 langchain-groq
