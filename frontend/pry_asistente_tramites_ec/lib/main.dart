@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'theme.dart';
 import 'widgets/service_card.dart';
 import 'widgets/chat_widget.dart';
+import 'widgets/animated_card.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Encabezado institucional
+                // Banner institucional
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 48, bottom: 24),
@@ -80,115 +81,154 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.bold,
                             ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 6),
                       Text(
                         'Gobierno Autónomo Descentralizado',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: Colors.white70,
                             ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 18),
+                      // Barra de búsqueda visual
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
-                          padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
-                            color: AppColors.primaryDark,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Bienvenido al Portal Ciudadano',
-                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white)),
-                              const SizedBox(height: 10),
-                              const Text(
-                                'Accede a todos los servicios municipales de forma rápida y sencilla. Nuestro asistente virtual está disponible 24/7 para ayudarte.',
-                                style: TextStyle(color: Colors.white, fontSize: 16),
-                              ),
-                              const SizedBox(height: 18),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Expanded(
-                                    child: OutlinedButton.icon(
-                                      style: OutlinedButton.styleFrom(
-                                        foregroundColor: Colors.white,
-                                        side: const BorderSide(color: Colors.white),
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                                      ),
-                                      icon: const Icon(Icons.info_outline),
-                                      label: const Text('Información de Trámites'),
-                                      onPressed: null, // Solo informativo
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: OutlinedButton.icon(
-                                      style: OutlinedButton.styleFrom(
-                                        foregroundColor: Colors.white,
-                                        side: const BorderSide(color: Colors.white),
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                                      ),
-                                      icon: const Icon(Icons.phone),
-                                      label: const Text('Contacto'),
-                                      onPressed: null, // Solo informativo
-                                    ),
-                                  ),
-                                ],
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
                               ),
                             ],
                           ),
+                          child: TextField(
+                            enabled: false,
+                            decoration: InputDecoration(
+                              hintText: 'Buscar trámites, servicios o información',
+                              prefixIcon: Icon(Icons.search, color: AppColors.primaryDark),
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      // Accesos rápidos
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          QuickAccessButton(
+                            icon: Icons.assignment,
+                            label: 'Trámites',
+                            color: AppColors.primaryDark,
+                          ),
+                          QuickAccessButton(
+                            icon: Icons.account_balance,
+                            label: 'Pagos',
+                            color: AppColors.primaryDark,
+                          ),
+                          QuickAccessButton(
+                            icon: Icons.info_outline,
+                            label: 'Información',
+                            color: AppColors.primaryDark,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      // Tarjeta animada para los párrafos institucionales
+                      AnimatedCard(
+                        delay: 200,
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Text(
+                              'Nuestro compromiso es ofrecerte una experiencia digital segura, eficiente y cercana. ¡Gracias por confiar en nosotros! ',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Avisos o noticias destacadas
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          // Aquí puedes agregar más widgets de avisos/noticias
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 28),
-                // Servicios destacados
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text('Servicios Más Consultados', style: Theme.of(context).textTheme.labelLarge),
-                ),
-                const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    children: [
-                      ServiceCard(
-                        icon: Icons.home_repair_service,
-                        title: 'Permisos de Construcción',
-                        description: 'Solicita permisos para obra nueva, ampliación o refacción',
-                      ),
-                      ServiceCard(
-                        icon: Icons.receipt_long,
-                        title: 'Impuestos y Tasas',
-                        description: 'Pago de impuestos municipales y consulta de deudas',
-                      ),
-                      ServiceCard(
-                        icon: Icons.calendar_month,
-                        title: 'Turnos Online',
-                        description: 'Reserva tu turno para atención presencial',
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 28),
+                // ...otros widgets si los hay...
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColors.primary,
-            child: const Icon(Icons.android),
-            onPressed: _openChat,
-          ),
         ),
-        if (_showChat)
-          ChatWidget(onClose: _closeChat, serverIp: widget.serverIp),
+        // Burbuja de chat flotante y movible
+        PositionedChatBubble(
+          serverIp: widget.serverIp,
+        ),
       ],
     );
   }
 }
+
+// Widget para la burbuja flotante y movible
+class PositionedChatBubble extends StatefulWidget {
+  final String serverIp;
+  const PositionedChatBubble({Key? key, required this.serverIp}) : super(key: key);
+
+  @override
+  State<PositionedChatBubble> createState() => _PositionedChatBubbleState();
+}
+
+class _PositionedChatBubbleState extends State<PositionedChatBubble> {
+  Offset _offset = const Offset(30, 100);
+  bool _showChat = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        if (!_showChat)
+          Positioned(
+            left: _offset.dx,
+            top: _offset.dy,
+            child: GestureDetector(
+              onPanUpdate: (details) {
+                setState(() {
+                  _offset += details.delta;
+                });
+              },
+              onTap: () => setState(() => _showChat = true),
+              child: Material(
+                elevation: 8,
+                shape: const CircleBorder(),
+                color: Colors.transparent,
+                child: CircleAvatar(
+                  radius: 32,
+                  backgroundColor: AppColors.primary,
+                  child: Icon(Icons.smart_toy, color: Colors.white, size: 32),
+                ),
+              ),
+            ),
+          ),
+        if (_showChat)
+          Positioned.fill(
+            child: ChatWidget(
+              onClose: () => setState(() => _showChat = false),
+              serverIp: widget.serverIp,
+            ),
+          ),
+      ],
+    );
+  }
+}
+
 
