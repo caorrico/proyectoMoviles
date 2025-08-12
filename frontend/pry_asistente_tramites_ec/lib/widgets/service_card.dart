@@ -19,9 +19,21 @@ class ServiceCard extends StatelessWidget {
           children: [
             Icon(icon, size: 36, color: AppColors.primary),
             const SizedBox(height: 12),
-            Text(title, style: Theme.of(context).textTheme.labelLarge, textAlign: TextAlign.center),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.labelLarge,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
             const SizedBox(height: 8),
-            Text(description, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+            Text(
+              description,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
       ),

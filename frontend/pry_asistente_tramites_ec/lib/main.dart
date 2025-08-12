@@ -159,13 +159,94 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
                           padding: const EdgeInsets.all(16),
-                          // Aquí puedes agregar más widgets de avisos/noticias
+                          decoration: BoxDecoration(
+                            color: Colors.blue[50],
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.campaign, color: AppColors.primaryDark),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Text(
+                                  '¡Recuerda! Puedes realizar tus trámites en línea y evitar filas.',
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                // ...otros widgets si los hay...
+
+                // Servicios más consultados
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Servicios más consultados',
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                              color: AppColors.primaryDark,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      const SizedBox(height: 12),
+                      Column(
+                        children: const [
+                          ServiceCard(
+                            icon: Icons.credit_card,
+                            title: 'Pago de impuestos',
+                            description: 'Consulta y paga tus impuestos municipales en línea.',
+                          ),
+                          SizedBox(height: 12),
+                          ServiceCard(
+                            icon: Icons.home_work,
+                            title: 'Certificado de predio',
+                            description: 'Solicita tu certificado de predio de manera digital.',
+                          ),
+                          SizedBox(height: 12),
+                          ServiceCard(
+                            icon: Icons.calendar_month,
+                            title: 'Agendamiento de citas',
+                            description: 'Reserva tu cita para atención presencial.',
+                          ),
+                          SizedBox(height: 12),
+                          ServiceCard(
+                            icon: Icons.person,
+                            title: 'Actualización de datos',
+                            description: 'Actualiza tu información personal en el sistema.',
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Pie de página institucional
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, bottom: 24),
+                  child: Column(
+                    children: [
+                      Divider(thickness: 1, color: Colors.grey[300]),
+                      const SizedBox(height: 8),
+                      Text(
+                        '© 2025 Municipio Digital - Todos los derechos reservados',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Desarrollado por el equipo de Innovación Tecnológica',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey[500]),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
